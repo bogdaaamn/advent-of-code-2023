@@ -1,5 +1,7 @@
-import { argv } from "bun";
 import chalk from "chalk";
+
+import { argv } from "bun";
+
 import { formatPerformance, withPerformance, isBetween } from "./utils.ts";
 import { scaffold } from "./scaffold.ts";
 
@@ -16,13 +18,12 @@ await scaffold(day, year);
 
 const name = `${day}`.padStart(2, "0");
 
-const { default: input } = await import(`@/${name}/input.txt`);
-const { partOne, partTwo, parse } = await import(`@/${name}/${name}.ts`);
+const { default: input } = await import(`~/${name}/input.txt`);
+const { partOne, partTwo, parse } = await import(`~/${name}/${name}.ts`);
 
-const [one, onePerformance] = withPerformance(() => partOne?.(parse(input)));
-const [two, twoPerformance] = withPerformance(() => partTwo?.(parse(input)));
+const [one, onePerformance] = withPerformance(() => partOne(parse(input)));
+const [two, twoPerformance] = withPerformance(() => partTwo(parse(input)));
 
-console.clear();
 console.log(
   "🌲",
   "Part One:",

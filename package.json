@@ -3,7 +3,9 @@
   "module": "scripts/main.ts",
   "type": "module",
   "scripts": {
-    "solve": "bun --watch ./scripts/solve.ts"
+    "solve": "bun ./scripts/solve.ts",
+    "scaffold": "bun ./scripts/scaffold.ts",
+    "test": "bun test"
   },
   "dependencies": {
     "chalk": "^5.3.0",
