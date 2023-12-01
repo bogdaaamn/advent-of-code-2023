@@ -33,16 +33,18 @@ export async function scaffold(day: number, year: number) {
   const test = dedent`
   import { describe, test, expect } from "bun:test";
 
-  const { default: input } = await import("~/${name}/example.txt");
+  const { default: inputOne } = await import("~/${name}/example.one.txt");
+  const { default: inputTwo } = await import("~/${name}/example.two.txt");
+
   const { partOne, partTwo, parse } = await import("~/${name}/${name}.ts");
   
   describe("Day ${name}", () => {
     test("Part one", () => {
-      expect(partOne(parse(input))).toEqual(input);
+      expect(partOne(parse(inputOne))).toEqual(0);
     });
   
     test("Part two", () => {
-      expect(partTwo(parse(input))).toEqual(input);
+      expect(partTwo(parse(inputTwo))).toEqual(0);
     });
   });
   `;
@@ -52,12 +54,12 @@ export async function scaffold(day: number, year: number) {
     return input;
   }
   
-  export function partOne(input: ReturnType<typeof parse>) {
-    return input;
+  export function partOne(input: ReturnType<typeof parse>): number {
+    return 0;
   }
   
-  export function partTwo(input: ReturnType<typeof parse>) {
-    return input;
+  export function partTwo(input: ReturnType<typeof parse>): number {
+    return 0;
   }
   `;
 
@@ -74,7 +76,8 @@ export async function scaffold(day: number, year: number) {
   await Bun.write(new URL(`${name}.test.ts`, directory.href), test);
   await Bun.write(new URL(`${name}.ts`, directory.href), solution);
   await Bun.write(new URL(`input.txt`, directory.href), input ?? "");
-  await Bun.write(new URL(`example.txt`, directory.href), "");
+  await Bun.write(new URL(`example.one.txt`, directory.href), "");
+  await Bun.write(new URL(`example.two.txt`, directory.href), "");
 
   console.log("📂 You all set up, have fun!");
 }
