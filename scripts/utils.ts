@@ -9,7 +9,9 @@ export function withPerformance<T>(handler: () => T) {
 export function formatPerformance(time: number) {
   const round = (x: number) => Math.round((x + Number.EPSILON) * 100) / 100;
   if (time < 1) return `${round(time * 1000)} µs`;
-  return `${round(time)} ms`;
+  if (time < 1000) return `${round(time)} ms`;
+  if (time < 60000) return `${round(time / 1000)} s`;
+  return `${round(time / 60000)} min`;
 }
 
 export function isBetween(x: number, [min, max]: [number, number]) {
