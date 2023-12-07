@@ -98,7 +98,8 @@ export function partTwo(input: ReturnType<typeof parse>): number {
     // So we can sort by both frequency and strength
     const sorted = Object.values(filtered).sort((a, b) => b - a);
 
-    // Add the jokers to the weakest card
+    // Add the jokers to the best combination
+    // to break the tie
     if (jokers) {
       // If all of them are jokers is 5 of kind!!!!!
       if (sorted[0] === undefined) {
